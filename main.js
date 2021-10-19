@@ -1,53 +1,72 @@
-function JQuery() {
-    // elem = document.querySelector('elem');
+function someTh() {
+    alert('You clicked it');
+}
 
-    this.addClass = function(elem, className) {
-        return elem.classList.add(className)
+class JQuery {
+    constructor(elem) {
+      if(typeof elem === 'string') {
+        elem = document.createElement(elem);
+      }
+      this.elem = elem;
     }
-    this.removeClass = function(elem, className) {
-        return elem.classList.remove(className);
+    text(text) {
+      if(text) {
+          this.elem.textContent = text;
+      } else {
+          console.log(this.elem.textContent);
+          this.elem.textContent;
+      }
+      return this;
     }
-    this.append = function(elem) {
-        return document.body.append(elem);
+    css(cssText) {
+      this.elem.style.cssText = `${cssText}`
+      return this;
     }
-    this.remove = function(elem) {
-        return elem.remove();
+    append () {
+      document.body.append(this.elem);
+      return this;
     }
-    // this.text = function(elem) {
-    //     return elem.
-    // }
-    this.attr = function(elem, name) {
-        console.log(elem.getAttribute(name));
-        return elem.getAttribute(name);
+    remove() {
+        this.elem.remove();
+        return this;
     }
-    this.children = function(elem) {
-        console.log(elem.children)
-        return elem.children;
+    addClass(className) {
+        this.elem.classList.add(className);
+        return this;
     }
-    this.addText = function(elem, text) {
-        return elem.innerHTML = text;
+    removeClass(className) {
+        this.elem.classList.remove(className);
+        return this;
     }
-    this.empty = function(elem) {
-        return elem.innerHTML = '';
+    attr(name, value) {
+        if(value) {
+            this.elem.setAttribute(name, value);
+            console.log(this.elem.attributes);
+        } else {
+            this.elem.getAttribute(name);
+            console.log(this.elem.attributes);
+        }
+        return this;
     }
-    // this.css = function(elem, {name: value}) {
-    this.css = function(elem, cssText) {
-        // return elem.style = {name: value};
-        return elem.style.cssText = `${cssText}`;
+    children() {
+        this.elem.children;
+        console.log(this.elem.children);
+        return this;
+    }
+    empty() {
+        this.elem.innerHTML = '';
+        return this;
+    }
+    click(handler) {
+        this.elem.addEventListener('click', handler);
+        return this;
     }
 }
 
-let jQuery = new JQuery();
-
-const header = document.querySelector('h1');
 const ul = document.querySelector('ul');
-
-jQuery.addText(header, 'Hey');
-jQuery.append(header);
-jQuery.addClass(header, 'new');
-jQuery.attr(header, 'class');
-jQuery.children(ul);
-jQuery.css(header, `color: red; font-style: italic`);
-// jQuery.empty(header);
-// jQuery.remove(header);
-// jQuery.removeClass(header, 'new');
+const jQuery = new JQuery(document.querySelector('h1'));
+const jQuery2 = new JQuery('h1');
+const jQuery3 = new JQuery(ul);
+jQuery2.text('Big Blue Header').css(`color: blue; font-size: 52px`).addClass('new').removeClass('new').attr('sth', 'yeah').append().children();
+jQuery.text('Big Red Header').css(`color: red; font-size: 52px`).click(someTh);
+jQuery3.children();
