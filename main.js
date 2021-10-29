@@ -36,10 +36,14 @@ class JQuery {
     remove() {
       for(let i = 0; i < this.elems.length; i++) {
         this.elems[i].remove();
+        // debugger;
       }
-    //   if(this.elems = this.elems[0].children) {
-    //     NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
-    //   }
+      if(this.elems[0].children) {
+        for(let i = 0; i < this.elems[0].children.length; i++) {
+          this.elems[0].children[i].remove();
+        }
+        // NodeList.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+      }
       return this;
     }
   
@@ -99,4 +103,5 @@ jq.children().text('wow').remove();
 
 const h1 = document.querySelector('h1');
 const jgh = new JQuery(h1);
+jgh.text('blah');
 // jgh.remove();
